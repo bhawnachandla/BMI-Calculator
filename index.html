@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BMI Calculator</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-image: url(bmi-image.jpg);
+        background-repeat: no-repeat;
+        background-size:auto;
+    }
+    .container {
+        max-width: 500px;
+        margin: 100px 0;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        margin-left: 50%;
+
+    }
+    h1 {
+        text-align: center;
+    }
+    label {
+        display: block;
+        margin-bottom: 10px;
+    }
+    input[type="number"] {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+    button {
+        display: block;
+        width: 100%;
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        background-color: #4caf50;
+        color: white;
+        cursor: pointer;
+    }
+    button:hover {
+        background-color: #45a049;
+    }
+    #result {
+        margin-top: 20px;
+        padding: 10px;
+        border-radius: 5px;
+        background-color: #f0f0f0;
+    }
+</style>
+</head>
+<body>
+<div class="container">
+    <h1>BMI Calculator</h1>
+    <label for="weight">Weight (kg):</label>
+    <input type="number" id="weight" placeholder="Enter your weight in kilograms">
+
+    <label for="height">Height (m):</label>
+    <input type="number" id="height" placeholder="Enter your height in meters">
+
+    <button onclick="calculateBMI()">Calculate BMI</button>
+
+    <div id="result"></div>
+</div>
+
+<script>
+    function bmiCalculator(weight, height) {
+        var bmi = weight / (height * height);
+        return bmi;
+    }
+
+    function interpretBmi(bmi) {
+        if (bmi < 18.5) {
+            return "Your BMI is " + bmi + ", so you are underweight.";
+        } else if (bmi >= 18.5 && bmi <= 24.9) {
+            return "Your BMI is " + bmi + ", so you have a normal weight.";
+        } else if (bmi > 24.9) {
+            return "Your BMI is " + bmi + ", so you are overweight.";
+        }
+    }
+
+    function calculateBMI() {
+        var weight = parseFloat(document.getElementById("weight").value);
+        var height = parseFloat(document.getElementById("height").value);
+
+        if (isNaN(weight) || isNaN(height) || weight <= 0 || height <= 0) {
+            document.getElementById("result").innerHTML = "Please enter valid weight and height values.";
+            return;
+        }
+
+        var bmi = bmiCalculator(weight, height);
+        var interpretation = interpretBmi(bmi);
+
+        document.getElementById("result").innerHTML = interpretation;
+    }
+</script>
+</body>
+</html>
